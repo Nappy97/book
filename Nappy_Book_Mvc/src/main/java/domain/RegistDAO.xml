@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.RegistDAO">
+
+	<insert id="insert" flushCache="true"
+		parameterType="domain.RegistDTO"
+		keyProperty="id" useGeneratedKeys="true" keyColumn="bk_id">
+		INSERT INTO exam_book
+			(bk_title, bk_price, bk_summary)
+		VALUES
+			(#{title}, #{price}, #{summary})
+	</insert>
+	
+	<!-- 글 조회 -->
+	<select id="selectById" resultType="domain.RegistDTO">
+		SELECT
+			bk_id "id",
+			bk_title "title",
+			bk_price "price",
+			bk_summary "summary",
+			bk_viewcnt "viewcnt",
+			bk_regdate "regDate"
+		FROM exam_book
+		WHERE bk_id = #{id}
+	</select>
+	
+	<select id="select" resultType="domain.RegistDTO">
+		SELECT
+			bk_id "id",
+			bk_title "title",
+			bk_price "price",
+			bk_summary "summary",
+			bk_viewcnt "viewcnt",
+			bk_regdate "regDate"
+		FROM exam_book
+		ORDER BY bk_id DESC;
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="incViewCnt" flushCache="true">
+		UPDATE exam_book
+		SET bk_viewcnt = bk_viewcnt + 1
+		WHERE bk_id = #{param1}
+	</update>
+
+	<!-- 글수정 -->
+	<update id="update" flushCache="true"
+		parameterType="domain.RegistDTO">
+		UPDATE exam_book
+		SET bk_title = #{title}, bk_price = #{price}, bk_summary = #{summary}
+		WHERE bk_id = #{id}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="deleteById" flushCache="true">
+		DELETE FROM exam_book WHERE bk_id = #{id}
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
